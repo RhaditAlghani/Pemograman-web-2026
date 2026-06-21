@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portofolio - Rhadit Alghani</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand { font-weight: 700; font-size: 1rem; color: #222; }
+  .nav-brand span { color: #4f7ef8; }
+
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: #666; font-size: 0.875rem;
+    cursor: pointer; padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: #4f7ef8; border-color: #4f7ef8; }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+
+  /* HERO */
+  #hero {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  #hero .container {
+    display: flex; align-items: center; gap: 2.5rem;
+    padding: 4rem 1.5rem;
+  }
+
+  .avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: #e8effe;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; font-weight: 700; color: #4f7ef8;
+    flex-shrink: 0;
+  }
+
+  .hero-text h1 { font-size: 1.8rem; font-weight: 700; color: #111; margin-bottom: 0.3rem; }
+  .hero-text .subtitle { color: #4f7ef8; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.5px; }
+  .hero-text p { color: #666; line-height: 1.7; font-size: 0.9rem; max-width: 520px; }
+
+  .hero-btns { margin-top: 1.2rem; display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+  .btn {
+    padding: 0.5rem 1.2rem; font-size: 0.85rem;
+    border-radius: 6px; cursor: pointer; border: none;
+    font-family: inherit; transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: #4f7ef8; color: #fff; }
+  .btn-outline { background: transparent; border: 1px solid #d0d0d0; color: #444; }
+  .btn-outline:hover { border-color: #999; opacity: 1; }
+
+  /* PAGE TITLE */
+  .page-title { font-size: 1.3rem; font-weight: 700; color: #111; margin-bottom: 0.3rem; }
+  .page-sub { color: #999; font-size: 0.85rem; margin-bottom: 2rem; }
+  .divider { height: 1px; background: #e8e8e8; margin: 2rem 0; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media(max-width:600px) { .about-grid { grid-template-columns: 1fr; } #hero .container { flex-direction: column; text-align: center; } .hero-btns { justify-content: center; } }
+
+  .info-card {
+    background: #fff; border: 1px solid #e8e8e8;
+    border-radius: 8px; padding: 1.2rem 1.4rem;
+  }
+  .info-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #999; margin-bottom: 1rem; }
+
+  .info-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; font-size: 0.875rem; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .label { color: #888; }
+  .info-row .value { color: #222; font-weight: 500; }
+
+  .skill-item { margin-bottom: 0.9rem; }
+  .skill-top { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.3rem; color: #555; }
+  .skill-bar { height: 5px; background: #eee; border-radius: 99px; overflow: hidden; }
+  .skill-fill { height: 100%; background: #4f7ef8; border-radius: 99px; transition: width 1s ease; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.5rem; }
+  @media(max-width:500px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+  .stat-box { background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-num { font-size: 1.5rem; font-weight: 700; color: #4f7ef8; }
+  .stat-lbl { font-size: 0.72rem; color: #999; margin-top: 0.2rem; }
+
+  /* PROJECTS (CRUD) */
+  .proj-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+  }
+
+  .search-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+  input[type=text], input[type=email], select, textarea {
+    border: 1px solid #d8d8d8; border-radius: 6px;
+    padding: 0.45rem 0.8rem; font-size: 0.85rem; font-family: inherit;
+    outline: none; background: #fff; color: #333;
+    transition: border-color 0.15s;
+  }
+  input[type=text]:focus, input[type=email]:focus, select:focus, textarea:focus { border-color: #4f7ef8; }
+  textarea { resize: vertical; }
+
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.2rem; }
+
+  .proj-card {
+    background: #fff; border: 1px solid #e8e8e8;
+    border-radius: 8px; padding: 1.2rem;
+    transition: box-shadow 0.15s;
+  }
+  .proj-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+  .proj-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
+  .proj-name { font-weight: 600; color: #111; font-size: 0.95rem; }
+  .status-badge {
+    font-size: 0.68rem; padding: 0.15rem 0.55rem;
+    border-radius: 99px; font-weight: 600; white-space: nowrap;
+  }
+  .s-COMPLETED { background: #e6f4ea; color: #2d7a3a; }
+  .s-ACTIVE { background: #e8f0fe; color: #1a56d6; }
+  .s-IN_PROGRESS { background: #fff4e0; color: #a35c00; }
+  .s-ARCHIVED { background: #f0f0f0; color: #777; }
+
+  .proj-desc { color: #777; font-size: 0.82rem; line-height: 1.6; margin-bottom: 0.8rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
+  .tag {
+    font-size: 0.7rem; padding: 0.15rem 0.55rem;
+    background: #f0f4ff; color: #4f7ef8;
+    border-radius: 4px;
+  }
+  .card-btns { display: flex; gap: 0.5rem; }
+  .btn-xs {
+    padding: 0.3rem 0.7rem; font-size: 0.75rem; border-radius: 5px;
+    cursor: pointer; border: 1px solid; font-family: inherit; transition: opacity 0.15s;
+  }
+  .btn-xs:hover { opacity: 0.75; }
+  .btn-edit { border-color: #f0a500; color: #f0a500; background: transparent; }
+  .btn-del  { border-color: #e74c3c; color: #e74c3c; background: transparent; }
+  .btn-view { border-color: #4f7ef8; color: #4f7ef8; background: transparent; }
+
+  .empty-state { text-align: center; padding: 3rem; color: #bbb; grid-column: 1/-1; }
+  .empty-icon { font-size: 2.5rem; margin-bottom: 0.7rem; }
+  .empty-txt { font-size: 0.9rem; }
+
+  /* MODAL */
+  .overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35); z-index: 500;
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .overlay.open { display: flex; }
+
+  .modal {
+    background: #fff; border-radius: 10px;
+    width: 100%; max-width: 500px; max-height: 90vh;
+    overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  }
+
+  .modal-head {
+    padding: 1.2rem 1.4rem; border-bottom: 1px solid #eee;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-head h3 { font-size: 1rem; font-weight: 600; color: #111; }
+  .modal-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #999; line-height: 1; }
+  .modal-close:hover { color: #333; }
+
+  .modal-body { padding: 1.4rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 0.3rem; font-weight: 500; }
+  .form-control { width: 100%; }
+
+  .modal-foot {
+    padding: 1rem 1.4rem; border-top: 1px solid #eee;
+    display: flex; justify-content: flex-end; gap: 0.6rem;
+  }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media(max-width:650px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  .contact-info-item {
+    display: flex; align-items: center; gap: 0.9rem;
+    padding: 0.9rem; border: 1px solid #e8e8e8;
+    border-radius: 8px; margin-bottom: 0.8rem; background: #fff;
+  }
+  .ci-icon { font-size: 1.2rem; width: 32px; text-align: center; }
+  .ci-label { font-size: 0.72rem; color: #999; }
+  .ci-val { font-size: 0.88rem; color: #333; font-weight: 500; }
+
+  .msg-card {
+    background: #fff; border: 1px solid #e8e8e8;
+    border-radius: 8px; padding: 1rem; margin-top: 0.8rem;
+  }
+  .msg-head { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+  .msg-name { font-weight: 600; font-size: 0.9rem; color: #111; }
+  .msg-time { font-size: 0.72rem; color: #bbb; }
+  .msg-email { font-size: 0.75rem; color: #999; margin-bottom: 0.4rem; }
+  .msg-text { font-size: 0.85rem; color: #555; line-height: 1.6; }
+
+  /* TOAST */
+  .toast-wrap { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: 0.5rem; }
+  .toast {
+    background: #fff; border: 1px solid #e0e0e0;
+    border-radius: 8px; padding: 0.7rem 1rem;
+    font-size: 0.82rem; color: #333;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    display: flex; align-items: center; gap: 0.5rem;
+    animation: fadeUp 0.2s ease;
+  }
+  .toast .ti { font-size: 1rem; }
+  .toast.success .ti { color: #2d7a3a; }
+  .toast.error .ti { color: #e74c3c; }
+  .toast.warn .ti { color: #f0a500; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  footer {
+    text-align: center; padding: 1.5rem;
+    font-size: 0.8rem; color: #bbb;
+    border-top: 1px solid #e8e8e8;
+    background: #fff; margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Rhadit<span>.</span>dev</div>
+  <ul class="nav-links">
+    <li><a onclick="go('hero')" id="n-hero" class="active">Beranda</a></li>
+    <li><a onclick="go('about')" id="n-about">Tentang</a></li>
+    <li><a onclick="go('projects')" id="n-projects">Proyek</a></li>
+    <li><a onclick="go('contact')" id="n-contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="section active">
+  <div id="hero" style="background:#fff;border-bottom:1px solid #e0e0e0">
+    <div class="container" style="display:flex;align-items:center;gap:2.5rem;padding:4rem 1.5rem;flex-wrap:wrap">
+      <div class="avatar">RA</div>
+      <div class="hero-text">
+        <h1>Rhadit Alghani</h1>
+        <div class="subtitle">Web Developer</div>
+        <p>Halo! Saya seorang pengembang web yang fokus pada pembuatan aplikasi yang bersih, fungsional, dan mudah digunakan. Saya senang bekerja dari frontend hingga backend.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="go('projects')">Lihat Proyek</button>
+          <button class="btn btn-outline" onclick="go('contact')">Hubungi Saya</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="page-title">Tentang Saya</div>
+    <div class="page-sub">Sedikit informasi mengenai saya dan kemampuan saya</div>
+
+    <div class="about-grid">
+      <div class="info-card">
+        <h3>Informasi Pribadi</h3>
+        <div class="info-row"><span class="label">Nama</span><span class="value">Rhadit Alghani</span></div>
+        <div class="info-row"><span class="label">Usia</span><span class="value">20 tahun</span></div>
+        <div class="info-row"><span class="label">Pendidikan</span><span class="value">S1 Informatika</span></div>
+        <div class="info-row"><span class="label">Lokasi</span><span class="value">Indonesia</span></div>
+        <div class="info-row"><span class="label">Status</span><span class="value" style="color:#2d7a3a">Tersedia</span></div>
+      </div>
+      <div class="info-card">
+        <h3>Skill Teknis</h3>
+        <div id="skills-container"></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num">3+</div><div class="stat-lbl">Tahun Pengalaman</div></div>
+      <div class="stat-box"><div class="stat-num">24</div><div class="stat-lbl">Proyek Selesai</div></div>
+      <div class="stat-box"><div class="stat-num">12</div><div class="stat-lbl">Klien</div></div>
+      <div class="stat-box"><div class="stat-num">5⭐</div><div class="stat-lbl">Rating Rata-rata</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS (CRUD) -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="page-title">Proyek Saya</div>
+    <div class="page-sub">Kumpulan proyek yang pernah saya kerjakan</div>
+
+    <div class="proj-toolbar">
+      <div class="search-row">
+        <input type="text" id="search" placeholder="Cari proyek..." style="width:200px" oninput="renderProjects()">
+        <select id="filterTag" onchange="renderProjects()">
+          <option value="">Semua Tag</option>
+        </select>
+        <select id="filterStatus" onchange="renderProjects()">
+          <option value="">Semua Status</option>
+          <option value="ACTIVE">Aktif</option>
+          <option value="COMPLETED">Selesai</option>
+          <option value="IN_PROGRESS">Proses</option>
+          <option value="ARCHIVED">Arsip</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">+ Tambah Proyek</button>
+    </div>
+
+    <div class="proj-grid" id="proj-grid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="page-title">Hubungi Saya</div>
+    <div class="page-sub">Kirim pesan dan saya akan membalas dalam 24 jam</div>
+    <div class="contact-grid">
+      <div>
+        <div class="info-card">
+          <h3>Kirim Pesan</h3>
+          <div class="form-group" style="margin-top:0.5rem">
+            <label class="form-label">Nama</label>
+            <input type="text" class="form-control" id="c-name" placeholder="Nama lengkap">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="c-email" placeholder="email@contoh.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pesan</label>
+            <textarea class="form-control" id="c-msg" rows="4" placeholder="Tulis pesan Anda..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%" onclick="sendMsg()">Kirim Pesan</button>
+        </div>
+
+        <div id="msg-section" style="display:none;margin-top:1.5rem">
+          <div style="font-size:0.8rem;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.8rem">Pesan Masuk</div>
+          <div id="msg-list"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-card" style="margin-bottom:1.2rem">
+          <h3>Info Kontak</h3>
+          <div class="contact-info-item" style="margin-top:0.5rem">
+            <div class="ci-icon">📧</div>
+            <div><div class="ci-label">Email</div><div class="ci-val">alex@devportfolio.id</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">💼</div>
+            <div><div class="ci-label">LinkedIn</div><div class="ci-val">/in/alexmahendra</div></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">🐙</div>
+            <div><div class="ci-label">GitHub</div><div class="ci-val">github.com/alexmhdr</div></div>
+          </div>
+          <div class="contact-info-item" style="margin-bottom:0">
+            <div class="ci-icon">📍</div>
+            <div><div class="ci-label">Lokasi</div><div class="ci-val">Indonesia</div></div>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>Ketersediaan</h3>
+          <div style="margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.85rem;color:#555">
+            <div>✅ Terbuka untuk freelance</div>
+            <div>✅ Kerja remote</div>
+            <div>✅ Proyek part-time</div>
+            <div style="margin-top:0.5rem;color:#999;font-size:0.8rem">Waktu respons: &lt; 24 jam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL TAMBAH/EDIT -->
+<div class="overlay" id="modal-overlay" onclick="closeBg(event,'modal-overlay')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Tambah Proyek</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="form-group">
+        <label class="form-label">Nama Proyek *</label>
+        <input type="text" class="form-control" id="f-name" placeholder="Nama proyek">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Deskripsi *</label>
+        <textarea class="form-control" id="f-desc" rows="3" placeholder="Deskripsi singkat proyek..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tag Teknologi (pisahkan dengan koma)</label>
+        <input type="text" class="form-control" id="f-tags" placeholder="React, Node.js, MongoDB">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-control" id="f-status">
+          <option value="ACTIVE">Aktif</option>
+          <option value="COMPLETED">Selesai</option>
+          <option value="IN_PROGRESS">Sedang Dikerjakan</option>
+          <option value="ARCHIVED">Diarsipkan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL GitHub (opsional)</label>
+        <input type="text" class="form-control" id="f-url" placeholder="https://github.com/...">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" onclick="saveProject()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETAIL -->
+<div class="overlay" id="view-overlay" onclick="closeBg(event,'view-overlay')">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="view-title">Detail Proyek</h3>
+      <button class="modal-close" onclick="closeView()">✕</button>
+    </div>
+    <div class="modal-body" id="view-body"></div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeView()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<footer>© 2025 Alex Mahendra · Dibuat dengan HTML, CSS & JavaScript</footer>
+
+<script>
+/* ===== DATA ===== */
+let projects = [
+  { id:1, name:"Platform E-Commerce", desc:"Aplikasi belanja online dengan keranjang, pembayaran, dan manajemen inventori.", tags:["React","Node.js","MongoDB"], status:"COMPLETED", url:"https://github.com", date:"2024-03-15" },
+  { id:2, name:"API Manajemen Tugas", desc:"REST API untuk manajemen tugas tim dengan JWT auth dan notifikasi email.", tags:["Express","PostgreSQL","Docker"], status:"ACTIVE", url:"https://github.com", date:"2024-06-20" },
+  { id:3, name:"Dashboard IoT", desc:"Dashboard monitoring sensor secara real-time dengan grafik interaktif.", tags:["Vue.js","Python","MQTT"], status:"IN_PROGRESS", url:"", date:"2025-01-10" },
+  { id:4, name:"Aplikasi Chat", desc:"Chat real-time dengan enkripsi end-to-end dan pengiriman file.", tags:["Socket.io","React","Redis"], status:"COMPLETED", url:"https://github.com", date:"2023-11-05" }
+];
+let messages = [];
+let nextId = 5;
+
+/* ===== NAV ===== */
+function go(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('n-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  if (id==='projects') { renderProjects(); buildFilterOptions(); }
+  if (id==='about') animateSkills();
+}
+
+/* ===== SKILLS ===== */
+const skills = [
+  {name:'JavaScript',val:90},{name:'React / Vue.js',val:85},
+  {name:'Node.js / Express',val:82},{name:'Python',val:72},
+  {name:'PostgreSQL / MongoDB',val:78},{name:'Docker',val:65}
+];
+let skillsRendered = false;
+function animateSkills() {
+  if (skillsRendered) return;
+  skillsRendered = true;
+  const c = document.getElementById('skills-container');
+  c.innerHTML = skills.map(s => `
+    <div class="skill-item">
+      <div class="skill-top"><span>${s.name}</span><span>${s.val}%</span></div>
+      <div class="skill-bar"><div class="skill-fill" id="sf${s.name.replace(/\W/g,'')}" style="width:0"></div></div>
+    </div>`).join('');
+  setTimeout(() => skills.forEach(s => {
+    const el = document.getElementById('sf'+s.name.replace(/\W/g,''));
+    if(el) el.style.width = s.val+'%';
+  }), 100);
+}
+
+/* ===== PROJECTS ===== */
+const statusLabel = { ACTIVE:'Aktif', COMPLETED:'Selesai', IN_PROGRESS:'Proses', ARCHIVED:'Arsip' };
+
+function renderProjects() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const ft = document.getElementById('filterTag').value;
+  const fs = document.getElementById('filterStatus').value;
+  const grid = document.getElementById('proj-grid');
+
+  const list = projects.filter(p =>
+    (!q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.tags.some(t=>t.toLowerCase().includes(q))) &&
+    (!ft || p.tags.includes(ft)) &&
+    (!fs || p.status === fs)
+  );
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📂</div><div class="empty-txt">Tidak ada proyek ditemukan.</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <div class="proj-card">
+      <div class="proj-card-top">
+        <div class="proj-name">${esc(p.name)}</div>
+        <span class="status-badge s-${p.status}">${statusLabel[p.status]||p.status}</span>
+      </div>
+      <div class="proj-desc">${esc(p.desc)}</div>
+      <div class="tag-list">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="card-btns">
+        <button class="btn-xs btn-view" onclick="viewProject(${p.id})">Detail</button>
+        <button class="btn-xs btn-edit" onclick="editProject(${p.id})">Edit</button>
+        <button class="btn-xs btn-del"  onclick="delProject(${p.id})">Hapus</button>
+      </div>
+    </div>`).join('');
+}
+
+function buildFilterOptions() {
+  const sel = document.getElementById('filterTag');
+  const cur = sel.value;
+  const tags = [...new Set(projects.flatMap(p=>p.tags))].sort();
+  sel.innerHTML = '<option value="">Semua Tag</option>' + tags.map(t=>`<option${t===cur?' selected':''}>${esc(t)}</option>`).join('');
+}
+
+/* ===== MODAL ===== */
+function openModal(p) {
+  document.getElementById('edit-id').value = '';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-tags').value = '';
+  document.getElementById('f-status').value = 'ACTIVE';
+  document.getElementById('f-url').value = '';
+  document.getElementById('modal-title').textContent = 'Tambah Proyek';
+  if (p) {
+    document.getElementById('edit-id').value = p.id;
+    document.getElementById('f-name').value = p.name;
+    document.getElementById('f-desc').value = p.desc;
+    document.getElementById('f-tags').value = p.tags.join(', ');
+    document.getElementById('f-status').value = p.status;
+    document.getElementById('f-url').value = p.url||'';
+    document.getElementById('modal-title').textContent = 'Edit Proyek';
+  }
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+function saveProject() {
+  const name = document.getElementById('f-name').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+  const tags = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const status = document.getElementById('f-status').value;
+  const url = document.getElementById('f-url').value.trim();
+  const editId = document.getElementById('edit-id').value;
+  if (!name||!desc) { toast('Nama dan deskripsi wajib diisi!','error'); return; }
+  if (editId) {
+    const i = projects.findIndex(p=>p.id==editId);
+    if(i>-1) projects[i]={...projects[i],name,desc,tags,status,url};
+    toast('Proyek berhasil diperbarui!','success');
+  } else {
+    projects.unshift({id:nextId++,name,desc,tags,status,url,date:new Date().toISOString().slice(0,10)});
+    toast('Proyek berhasil ditambahkan!','success');
+  }
+  closeModal(); renderProjects(); buildFilterOptions();
+}
+
+function editProject(id) { const p=projects.find(x=>x.id===id); if(p) openModal(p); }
+
+function delProject(id) {
+  const p=projects.find(x=>x.id===id);
+  if(!p) return;
+  if(!confirm(`Hapus proyek "${p.name}"?`)) return;
+  projects=projects.filter(x=>x.id!==id);
+  renderProjects(); buildFilterOptions();
+  toast('Proyek dihapus.','warn');
+}
+
+function viewProject(id) {
+  const p=projects.find(x=>x.id===id); if(!p) return;
+  document.getElementById('view-title').textContent = p.name;
+  document.getElementById('view-body').innerHTML = `
+    <div style="display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap">
+      <span class="status-badge s-${p.status}">${statusLabel[p.status]||p.status}</span>
+      ${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}
+    </div>
+    <p style="color:#555;font-size:0.9rem;line-height:1.7;margin-bottom:1rem">${esc(p.desc)}</p>
+    <div style="font-size:0.8rem;color:#999;margin-bottom:0.4rem">Tanggal dibuat: ${p.date}</div>
+    ${p.url?`<a href="${esc(p.url)}" target="_blank" style="color:#4f7ef8;font-size:0.85rem">🔗 Lihat Repositori</a>`:''}`;
+  document.getElementById('view-overlay').classList.add('open');
+}
+function closeView() { document.getElementById('view-overlay').classList.remove('open'); }
+function closeBg(e,id) { if(e.target===e.currentTarget) document.getElementById(id).classList.remove('open'); }
+
+/* ===== CONTACT ===== */
+function sendMsg() {
+  const name=document.getElementById('c-name').value.trim();
+  const email=document.getElementById('c-email').value.trim();
+  const msg=document.getElementById('c-msg').value.trim();
+  if(!name||!email||!msg){toast('Semua kolom wajib diisi!','error');return;}
+  if(!email.includes('@')){toast('Email tidak valid!','error');return;}
+  messages.push({name,email,msg,time:new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})});
+  document.getElementById('c-name').value='';
+  document.getElementById('c-email').value='';
+  document.getElementById('c-msg').value='';
+  toast('Pesan berhasil dikirim!','success');
+  renderMsgs();
+}
+
+function renderMsgs() {
+  const sec=document.getElementById('msg-section');
+  const list=document.getElementById('msg-list');
+  if(!messages.length){sec.style.display='none';list.innerHTML='';return;}
+  sec.style.display='block';
+  list.innerHTML=messages.map((m,i)=>`
+    <div class="msg-card">
+      <div class="msg-head">
+        <span class="msg-name">${esc(m.name)}</span>
+        <span class="msg-time">${m.time}</span>
+      </div>
+      <div class="msg-email">${esc(m.email)}</div>
+      <div class="msg-text">${esc(m.msg)}</div>
+      <button class="btn-xs btn-del" style="margin-top:0.6rem" onclick="delMsg(${i})">Hapus</button>
+    </div>`).join('');
+}
+function delMsg(i){ messages.splice(i,1); renderMsgs(); toast('Pesan dihapus.','warn'); }
+
+/* ===== TOAST ===== */
+const icons = {success:'✓', error:'✕', warn:'⚠'};
+function toast(text,type='success') {
+  const w=document.getElementById('toast-wrap');
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;
+  t.innerHTML=`<span class="ti">${icons[type]||'ℹ'}</span>${text}`;
+  w.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+
+/* ===== UTILS ===== */
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+</script>
+</body>
+</html>
