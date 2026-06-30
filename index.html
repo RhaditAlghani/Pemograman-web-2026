@@ -1,173 +1,190 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Developer</title>
-</head>
-<body>
-   <header>
-    <h1>Hantam</h1>
-
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <section id="hero">
-        <h2>Selamat Datang di Portofolio Saya</h2>
-        <p>Web Developer | Mobile Enthusiast</p>
-        <img src="data:image/jpeg;base64,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" alt="Foto Profil Saya" />
-    </section>
-
-    <article id="about">
-        <h2>Tentang Saya</h2>
-        <p>Saya adalah mahasiswa teknik informatika yang....</p>
-    </article>
-    <section id="education">
-    <h2>Riwayat Pendidikan</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Tahun</th>
-                <th>Institusi</th>
-                <th>Jurusan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2020 - Sekarang</td>
-                <td>Universitas Teknologi</td>
-                <td>Teknik Informatika</td>
-            </tr>
-                <td>2017 - 2020</td>
-    <td>SMA Negeri 2</td>
-    <td>IPA</td>
-</tr>
-</tbody>
-</table>
-<section id="contact">
-    <h2>Hubungi Saya</h2>
-    <form action="" method="POST">
-        <div>
-            <label for="name">Nama Lengkap:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
-        </div>
-
-        <div>
-            <label for="message">Pesan:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-
-        <button type="submit">Kirim Pesan</button>
-    </form>
-</section>
-</section>
-        </tbody>
-    </table>
-</section>
-
-</main>
-
-<footer>
-    <p>&copy; 2024 Nama Mahasiswa. All rights reserved.</p>
-</footer> 
-</body>
-</html> -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Mahasiswa TI UIR</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Racing 2025</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <header>
-        <h1>Portofolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- ─── NAV ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-bar"></span>F1<span class="logo-thin"> RACING</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#drivers">Pembalap</a></li>
+        <li><a href="#teams">Tim</a></li>
+        <li><a href="#schedule">Jadwal</a></li>
+        <li><a href="#stats">Statistik</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-    <main>
-        <section id="hero">
-            <img src="image/waifu.jpg" alt="Foto Profil" class="profile-img">
-            <div class="hero-text">
-                <h2>Halo Beb, Saya Kaoruko Waguri </h2>
-                <p>Web Developer | Informatics Engineering Student at UIR</p>
-            </div>
-        </section>
+  <!-- ─── HERO ─── -->
+  <header class="hero">
+    <div class="hero-bg">
+      <div class="track-line t1"></div>
+      <div class="track-line t2"></div>
+      <div class="track-line t3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Musim 2025 · Formula One World Championship</p>
+      <h1 class="hero-title">
+        KECEPATAN<br />
+        <span class="hero-accent">TANPA BATAS</span>
+      </h1>
+      <p class="hero-sub">Ikuti setiap momen balap F1 — pembalap, tim, jadwal, dan statistik lengkap musim 2025.</p>
+      <div class="hero-cta">
+        <a href="#schedule" class="btn btn-red">Lihat Jadwal Race</a>
+        <a href="#drivers" class="btn btn-ghost">Klasemen Pembalap</a>
+      </div>
+    </div>
+    <div class="hero-flag">
+      <div class="flag-stripe w"></div>
+      <div class="flag-stripe b"></div>
+      <div class="flag-stripe w"></div>
+      <div class="flag-stripe b"></div>
+      <div class="flag-stripe w"></div>
+      <div class="flag-stripe b"></div>
+      <div class="flag-stripe w"></div>
+      <div class="flag-stripe b"></div>
+    </div>
+  </header>
 
-        <article id="about">
-            <h2>Tentang Saya</h2>
-            <p>Saya adalah mahasiswa Teknik Informatika yang sedang mendalami teknologi pengembangan web khususnya di sisi frontend menggunakan HTML5 dan CSS3.</p>
-        </article>
+  <!-- ─── LIVE TICKER ─── -->
+  <div class="ticker">
+    <div class="ticker-label">LIVE</div>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="tickerInner">
+        <span>🏎️ Verstappen memimpin klasemen dengan 319 poin</span>
+        <span>🏆 McLaren unggul di klasemen konstruktor</span>
+        <span>🏁 British GP — Silverstone · 6 Juli 2025</span>
+        <span>⚡ Norris fastest lap di Monaco GP</span>
+        <span>📍 Round berikutnya: Belgian GP · Spa-Francorchamps</span>
+        <span>🔴 Ferrari membawa upgrade besar untuk British GP</span>
+        <span>🏎️ Verstappen memimpin klasemen dengan 319 poin</span>
+        <span>🏆 McLaren unggul di klasemen konstruktor</span>
+        <span>🏁 British GP — Silverstone · 6 Juli 2025</span>
+        <span>⚡ Norris fastest lap di Monaco GP</span>
+      </div>
+    </div>
+  </div>
 
-        <section id="education">
-            <h2>Riwayat Pendidikan</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tahun</th>
-                        <th>Institusi</th>
-                        <th>Jurusan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2023 - Sekarang</td>
-                        <td>Universitas Islam Riau</td>
-                        <td>Teknik Informatika</td>
-                    </tr>
-                    <tr>
-                        <td>2020 - 2023</td>
-                        <td>SMA Negeri 5 Pekanbaru</td>
-                        <td>IPA</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+  <!-- ─── DRIVERS ─── -->
+  <section class="section" id="drivers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Klasemen 2025</span>
+        <h2 class="section-title">PEMBALAP</h2>
+      </div>
 
-        <section id="contact">
-            <h2>Hubungi Saya</h2>
-            <form action="">
-                <div class="form-group">
-                    <label for="name">Nama Lengkap:</label>
-                    <input type="text" id="name" placeholder="Masukkan nama Anda" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="contoh@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Pesan:</label>
-                    <textarea id="message" rows="4" placeholder="Tulis pesan Anda di sini" required></textarea>
-                </div>
-                <button type="submit">Kirim Pesan</button>
-            </form>
-        </section>
-    </main>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="top5">Top 5</button>
+        <button class="filter-btn" data-filter="active">Aktif</button>
+      </div>
 
-    <footer>
-        <p>&copy; 2026 Teknik Informatika UIR. Disusun oleh Mahasiswa.</p>
-    </footer>
+      <div class="drivers-grid" id="driversGrid"></div>
+    </div>
+  </section>
 
+  <!-- ─── TEAMS ─── -->
+  <section class="section section-dark" id="teams">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Konstruktor 2025</span>
+        <h2 class="section-title">TIM F1</h2>
+      </div>
+      <div class="teams-grid" id="teamsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ─── SCHEDULE ─── -->
+  <section class="section" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Formula 1 · 2025</span>
+        <h2 class="section-title">JADWAL RACE</h2>
+      </div>
+      <div class="schedule-list" id="scheduleList"></div>
+    </div>
+  </section>
+
+  <!-- ─── STATS ─── -->
+  <section class="section section-dark" id="stats">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Musim 2025</span>
+        <h2 class="section-title">STATISTIK</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-block">
+          <div class="stat-num" data-target="24">0</div>
+          <div class="stat-desc">Total Race Musim Ini</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" data-target="20">0</div>
+          <div class="stat-desc">Pembalap Aktif</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" data-target="10">0</div>
+          <div class="stat-desc">Tim Konstruktor</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" data-target="319">0</div>
+          <div class="stat-desc">Poin Pemimpin Klasemen</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" data-target="61">0</div>
+          <div class="stat-desc">Kemenangan Verstappen</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" data-target="103">0</div>
+          <div class="stat-desc">Kemenangan Hamilton</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="nav-logo"><span class="logo-bar"></span>F1<span class="logo-thin"> RACING</span></span>
+          <p>Website informatif F1 musim 2025. Dibuat dengan HTML, CSS &amp; JavaScript murni.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="#drivers">Pembalap</a></li>
+            <li><a href="#teams">Tim</a></li>
+            <li><a href="#schedule">Jadwal</a></li>
+            <li><a href="#stats">Statistik</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Deploy</h4>
+          <ul>
+            <li><a href="https://github.com" target="_blank">GitHub</a></li>
+            <li><a href="https://vercel.com" target="_blank">Vercel</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 F1 Racing Website · Dibuat untuk tugas frontend</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
